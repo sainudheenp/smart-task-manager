@@ -44,16 +44,56 @@ export function PriorityDorpDown() {
         null
     )
     return (
-        <div>
-            <Popover>
-                <Button>
-                    <div>
-                        <div>
-                            <GoPlusCircle />
-                            <span>Priority</span>
+        <div className="flex items-center space-x-4">
+            <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                    <Button size="sm" variant={"outline"}
+                        className="h-10 justify-start border-dashed px-5" >
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2">
+                                <GoPlusCircle />
+                                <span>Priority</span>
+                            </div>
+                            <Separator orientation="vertical"
+                                className="h-6 border-1 border-gray-300" />
+                            <div className="flex items-center gap-2">
+                                <Badge variant={"secondary"}>Low</Badge>
+                                <Badge variant={"secondary"}>Medium</Badge>
+                            </div>
                         </div>
-                    </div>
-                </Button>
+                    </Button>
+                </PopoverTrigger>
+                <PopoverContent className="p-0 poppins w-52 z-50"
+                   align="center" side="bottom" sideOffset={8} avoidCollisions={false}>
+                    <Command>
+                        <CommandInput placeholder="Change Priority..." />
+                        <CommandList>
+                            <CommandEmpty>No Results Found.</CommandEmpty>
+                            <CommandGroup>
+                                {
+                                    statuses.map((status, idx) => (
+                                        <CommandItem key={idx}
+                                            value={status.value}
+                                            className="flex justify-between"
+                                            onSelect={(value) => {
+                                                setSelectedStatus(
+                                                    statuses.find((priority) => priority.value === value) || null
+                                                )
+                                            }}
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <Checkbox />
+                                                <status.icon />
+                                                <span>{status.label}</span>
+                                            </div>
+                                            <span>23</span>
+                                        </CommandItem>
+                                    ))
+                                }
+                            </CommandGroup>
+                        </CommandList>
+                    </Command>
+                </PopoverContent>
             </Popover>
         </div>
     )
