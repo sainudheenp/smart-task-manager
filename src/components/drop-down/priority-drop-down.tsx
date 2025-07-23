@@ -64,7 +64,7 @@ export function PriorityDorpDown() {
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="p-0 poppins w-52 z-50"
-                   align="center" side="bottom" sideOffset={8} avoidCollisions={false}>
+                    align="center" side="bottom" sideOffset={8} avoidCollisions={false}>
                     <Command>
                         <CommandInput placeholder="Change Priority..." />
                         <CommandList>
