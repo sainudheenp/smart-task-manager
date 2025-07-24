@@ -5,7 +5,7 @@ import { Button } from "../ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover"
 import { GoPlusCircle } from 'react-icons/go'
-import { Checkbox } from "@radix-ui/react-checkbox"
+import { Checkbox } from "../ui/checkbox"
 import { IoMdArrowUp } from "react-icons/io"
 import { IoArrowBack } from "react-icons/io5"
 import { IoArrowDown } from "react-icons/io5"
