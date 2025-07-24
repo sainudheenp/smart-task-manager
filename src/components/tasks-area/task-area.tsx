@@ -4,6 +4,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import SearchInput from "./search-input";
 import { PriorityDorpDown } from "../drop-down/priority-drop-down";
 import { StatusDorpDown } from "../drop-down/status-drop-down";
+import { DropDownViewColumns } from "../drop-down/view-columns-drop-down";
 
 export default function TasksArea() {
     return (
@@ -25,6 +26,7 @@ export default function TasksArea() {
                             </Button>
                         </div>
                         {/* Drop down view column */}
+                        <DropDownViewColumns />
                     </div>
                 </CardHeader>
                 <CardContent>

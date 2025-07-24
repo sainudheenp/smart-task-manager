@@ -28,7 +28,16 @@ export function DropDownViewColumns() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 poppins">
-
+                <DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+                    Title
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar}>
+                    Status
+                </DropdownMenuCheckboxItem>  <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
+                    Priority
+                </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
