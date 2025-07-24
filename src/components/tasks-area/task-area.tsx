@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { IoCloseSharp } from "react-icons/io5";
 import SearchInput from "./search-input";
 import { PriorityDorpDown } from "../drop-down/priority-drop-down";
+import { StatusDorpDown } from "../drop-down/status-drop-down";
 
 export default function TasksArea() {
     return (
@@ -13,16 +14,17 @@ export default function TasksArea() {
                         <div className="flex items-center gap-2">
                             <SearchInput />
 
+                            {/* Status Drop Down */}
+                            <StatusDorpDown />
+
+                            <PriorityDorpDown />
+
                             <Button variant={"ghost"} className="h-10">
                                 <span>Reset</span>
                                 <IoCloseSharp />
                             </Button>
-
-
-                                <PriorityDorpDown />
-
-                           
                         </div>
+                        {/* Drop down view column */}
                     </div>
                 </CardHeader>
                 <CardContent>
