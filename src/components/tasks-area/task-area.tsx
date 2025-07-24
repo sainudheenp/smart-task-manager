@@ -11,8 +11,8 @@ export default function TasksArea() {
         <div className="px-7 mt-5">
             <Card>
                 <CardHeader>
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between ">
+                        <div className="flex flex-col items-center gap-2 sm:flex-row ">
                             <SearchInput />
 
                             {/* Status Drop Down */}

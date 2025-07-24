@@ -1,0 +1,105 @@
+import { Priority, Task, Status } from "@/app/data/task-data";
+import { Badge } from "../ui/badge";
+import { Column, ColumnDef, ColumnFaceting } from '@tanstack/react-table'
+import { ArrowUpCircle, CheckCircle, CheckCircle2, Circle, HelpCircle, XCircle } from "lucide-react";
+import { IoMdArrowDown, IoMdArrowRoundDown, IoMdArrowUp } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
+import { IoArrowDown } from "react-icons/io5";
+import { Star } from "lucide-react";
+import { Checkbox } from "../ui/checkbox";
+import { ArrowUpDown } from "lucide-react";
+import { GrHide } from "react-icons/gr";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "../ui/dropdown-menu";
+import { start } from "repl";
+
+
+function renderStatusIcons(status: Status) {
+    switch (status) {
+        case "Backlog":
+            return HelpCircle
+        case "Canceled":
+            return XCircle
+        case "Done":
+            return CheckCircle2
+        case "In Progress":
+            return ArrowUpCircle
+        case "Todo":
+            return Circle
+        default:
+            break;
+    }
+}
+
+function renderPriorityIcons(priority: Priority) {
+    switch (priority) {
+        case "Low":
+            return IoArrowDown
+        case "Medium":
+            return IoArrowBack
+        case "High":
+            return IoMdArrowUp
+    }
+}
+
+function formatDate(date: Date): string {
+    const day = date.getDate()
+    const month = date.toLocaleString("default", { month: "long" })
+    const year = date.getFullYear()
+
+    const suffix =
+        day % 10 === 1 && day !== 11
+            ? "st"
+            : day % 10 === 2 && day !== 12
+                ? "nd"
+                : day % 10 === 3 && day !== 13
+                    ? "rd"
+                    : "th";
+    return `${day} ${suffix} ${month} ${year}`
+
+}
+
+type SortableHeaderProps = {
+    column: Column<Task, unknown>;
+    label: string;
+}
+
+const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
+    const isSorted = column.getIsSorted();
+    const SortingIcon =
+        isSorted === "asc"
+            ? IoMdArrowUp
+            : isSorted === "desc"
+                ? IoMdArrowDown
+                : ArrowUpDown
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <div className={`flex items-start py-[14px] select-none cursor-pointer p-2 gap-1 
+                  ${isSorted && "text-primary"}  `} aria-label={`Sort by ${label}`} >
+                    {label}
+                    <SortingIcon className="h-4 w-4" />
+                </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" side="bottom" className="poppins">
+                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+                    <IoMdArrowUp className="mr-2 h-4 w-4">
+                        Asc
+                    </IoMdArrowUp>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+                    <IoMdArrowUp className="mr-2 h-4 w-4">
+                        Desc
+                    </IoMdArrowUp>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+                    <IoMdArrowUp className="mr-2 h-4 w-4">
+                        Hide
+                    </IoMdArrowUp>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+};
+
