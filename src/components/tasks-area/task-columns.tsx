@@ -1,4 +1,4 @@
-import { Priority, Task, Status } from "@/app/data/task-data";
+import { Priority, Task, Status, tasks } from "@/app/data/task-data";
 import { Badge } from "../ui/badge";
 import { Column, ColumnDef, ColumnFaceting } from '@tanstack/react-table'
 import { ArrowUpCircle, CheckCircle, CheckCircle2, Circle, HelpCircle, XCircle } from "lucide-react";
@@ -103,3 +103,95 @@ const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
     )
 };
 
+export const tasksColumns: ColumnDef<Task>[] = [
+    {
+        id: "select",
+        header: ({ table }) => (
+            <Checkbox checked={table.getIsAllRowsSelected() ||
+                (table.getIsSomeRowsSelected() && "indeterminate")
+            }
+                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label="Select all" />
+        ),
+        cell: ({ row }) => (
+            <Checkbox checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label="Select row" />
+        ),
+        enableSorting: false,
+        enableHiding: false,
+    },
+    {
+        accessorKey: "taskId",
+        header: "Task",
+    },
+    {
+        accessorKey: "isFovorite",
+        header: "",
+        cell: ({ row }) => {
+            const FavoriteIcon = row.original.isFavorite && Star;
+            return FavoriteIcon && <FavoriteIcon size={14} />
+        }
+    },
+    {
+        accessorKey: "title",
+        header: ({ column }) => <SortableHeader column={column} label="Title" />,
+        cell: ({ row }) => {
+            const taskLabel = row.original.label;
+            const taskTitle = row.original.title;
+            return (
+                <div className="flex items-center gap-2">
+                    <Badge variant={"outline"}>{taskLabel}</Badge>
+                    <span>{taskTitle}</span>
+                </div>
+            )
+        }
+    },
+    {
+        accessorKey: "status",
+        header: ({ column }) => <SortableHeader column={column} label="Status" />,
+        cell: ({ row }) => {
+            const StatusIcon = renderStatusIcons(row.original.status);
+            const status = row.original.status;
+            return (
+                <div className="flex items-center gap-2 text-sm">
+                    {StatusIcon && (
+                        <StatusIcon size={17} className="text-gray-600 opacity-95" />
+                    )}
+                    <span>{status}</span>
+                </div>
+            )
+        }
+    },
+    {
+        accessorKey: "priority",
+        header: ({ column }) => <SortableHeader column={column} label="Priority" />,
+        cell: ({ row }) => {
+            const PriorityIcon = renderPriorityIcons(row.original.priority);
+            const Priority = row.original.priority;
+            return (
+                <div >
+                    {PriorityIcon && (
+                        <div className="flex items-center gap-2 text-sm">
+                            <PriorityIcon className="text-gray-600 opacity-95">
+                                {Priority}
+                            </PriorityIcon>
+                        </div>
+                    )}
+                </div>
+            )
+        }
+    },
+    {
+        accessorKey: "createdAt",
+        header: ({ column }) => <SortableHeader column={column} label="Created At" />,
+        cell: ({ row }) => {
+            const date = row.original.createdAt;
+            const formattedDate = formatDate(date);
+            return formattedDate
+        }
+    },
+    {
+        id: "actions"
+    }
+]
