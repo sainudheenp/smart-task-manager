@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar";
 import StatCards from "@/components/stats-cards";
-import TasksArea from "@/components/tasks-area/task-area";
+import TasksArea from "@/components/tasks-area/search-input";
 
 export default function Home() {
   return (
