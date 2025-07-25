@@ -7,6 +7,7 @@ import { PriorityDorpDown } from "../drop-down/priority-drop-down";
 import { StatusDorpDown } from "../drop-down/status-drop-down";
 import { DropDownViewColumns } from "../drop-down/view-columns-drop-down";
 import TaskTable from "./task-table";
+import PaginationArea from "./pagination/pagination-area";
 
 export default function TasksArea() {
     return (
@@ -36,6 +37,7 @@ export default function TasksArea() {
                     <TaskTable />
                 </CardContent>
                 <CardFooter>
+                    <PaginationArea />
                     {/* CardFooter */}
                 </CardFooter>
             </Card>
