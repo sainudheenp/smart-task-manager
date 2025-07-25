@@ -42,6 +42,7 @@ function renderPriorityIcons(priority: Priority) {
 }
 
 function formatDate(date: Date): string {
+    
     const day = date.getDate()
     const month = date.toLocaleString("default", { month: "long" })
     const year = date.getFullYear()
@@ -63,45 +64,88 @@ type SortableHeaderProps = {
     label: string;
 }
 
-const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
-    const isSorted = column.getIsSorted();
-    const SortingIcon =
-        isSorted === "asc"
-            ? IoMdArrowUp
-            : isSorted === "desc"
-                ? IoMdArrowDown
-                : ArrowUpDown
+// const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
+//     const isSorted = column.getIsSorted();
+//     const SortingIcon =
+//         isSorted === "asc"
+//             ? IoMdArrowUp
+//             : isSorted === "desc"
+//                 ? IoMdArrowDown
+//                 : ArrowUpDown
 
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <div className={`flex items-start py-[14px] select-none cursor-pointer p-2 gap-1 
-                  ${isSorted && "text-primary"}  `} aria-label={`Sort by ${label}`} >
-                    {label}
-                    <SortingIcon className="h-4 w-4" />
-                </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" side="bottom" className="poppins">
-                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-                    <IoMdArrowUp className="mr-2 h-4 w-4">
-                        Asc
-                    </IoMdArrowUp>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-                    <IoMdArrowUp className="mr-2 h-4 w-4">
-                        Desc
-                    </IoMdArrowUp>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-                    <IoMdArrowUp className="mr-2 h-4 w-4">
-                        Hide
-                    </IoMdArrowUp>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
+//     return (
+//         <DropdownMenu>
+//             <DropdownMenuTrigger asChild>
+//                 <div className={`flex items-start py-[14px] select-none cursor-pointer p-2 gap-1 
+//                   ${isSorted && "text-primary"}  `} aria-label={`Sort by ${label}`} >
+//                     {label}
+//                     <SortingIcon className="h-4 w-4" />
+//                 </div>
+//             </DropdownMenuTrigger>
+//             <DropdownMenuContent align="start" side="bottom" className="poppins">
+//                 <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+//                     <IoMdArrowUp className="mr-2 h-4 w-4">
+//                         Asc
+//                     </IoMdArrowUp>
+//                 </DropdownMenuItem>
+//                 <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+//                     <IoMdArrowUp className="mr-2 h-4 w-4">
+//                         Desc
+//                     </IoMdArrowUp>
+//                 </DropdownMenuItem>
+//                 <DropdownMenuSeparator />
+//                 <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+//                     <IoMdArrowUp className="mr-2 h-4 w-4">
+//                         Hide
+//                     </IoMdArrowUp>
+//                 </DropdownMenuItem>
+//             </DropdownMenuContent>
+//         </DropdownMenu>
+//     )
+// };
+
+const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
+  const isSorted = column.getIsSorted();
+  const SortingIcon =
+    isSorted === "asc"
+      ? IoMdArrowUp
+      : isSorted === "desc"
+      ? IoMdArrowDown
+      : ArrowUpDown;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <div
+          className={`flex items-start py-[14px] select-none cursor-pointer p-2 gap-1 ${
+            isSorted ? "text-primary" : ""
+          }`}
+          aria-label={`Sort by ${label}`}
+        >
+          {label}
+          <SortingIcon className="h-4 w-4" />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" side="bottom" className="poppins">
+        <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+          <IoMdArrowDown className="mr-2 h-4 w-4" />
+        Desc
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+          <IoMdArrowUp className="mr-2 h-4 w-4" />
+        Asc
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => column.clearSorting()}>
+          <GrHide className="mr-2 h-4 w-4" />
+          Clear
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 };
+
+
 
 export const tasksColumns: ColumnDef<Task>[] = [
     {
@@ -126,7 +170,7 @@ export const tasksColumns: ColumnDef<Task>[] = [
         header: "Task",
     },
     {
-        accessorKey: "isFovorite",
+        accessorKey: "isFavorite",
         header: "",
         cell: ({ row }) => {
             const FavoriteIcon = row.original.isFavorite && Star;
@@ -163,25 +207,25 @@ export const tasksColumns: ColumnDef<Task>[] = [
             )
         }
     },
-    {
-        accessorKey: "priority",
-        header: ({ column }) => <SortableHeader column={column} label="Priority" />,
-        cell: ({ row }) => {
-            const PriorityIcon = renderPriorityIcons(row.original.priority);
-            const Priority = row.original.priority;
-            return (
-                <div >
-                    {PriorityIcon && (
-                        <div className="flex items-center gap-2 text-sm">
-                            <PriorityIcon className="text-gray-600 opacity-95">
-                                {Priority}
-                            </PriorityIcon>
-                        </div>
-                    )}
-                </div>
-            )
-        }
-    },
+{
+  accessorKey: "priority",
+  header: ({ column }) => <SortableHeader column={column} label="Priority" />,
+  cell: ({ row }) => {
+    const PriorityIcon = renderPriorityIcons(row.original.priority);
+    const Priority = row.original.priority;
+
+    return (
+      <div>
+        {PriorityIcon && (
+          <div className="flex items-center gap-2 text-sm">
+            <PriorityIcon className="text-gray-600 opacity-95" />
+            <span>{Priority}</span>
+          </div>
+        )}
+      </div>
+    );
+  }
+},
     {
         accessorKey: "createdAt",
         header: ({ column }) => <SortableHeader column={column} label="Created At" />,

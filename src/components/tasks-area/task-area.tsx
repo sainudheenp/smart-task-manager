@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { IoCloseSharp } from "react-icons/io5";
@@ -5,6 +6,7 @@ import SearchInput from "./search-input";
 import { PriorityDorpDown } from "../drop-down/priority-drop-down";
 import { StatusDorpDown } from "../drop-down/status-drop-down";
 import { DropDownViewColumns } from "../drop-down/view-columns-drop-down";
+import TaskTable from "./task-table";
 
 export default function TasksArea() {
     return (
@@ -31,6 +33,7 @@ export default function TasksArea() {
                 </CardHeader>
                 <CardContent>
                     {/* Table Content */}
+                    <TaskTable />
                 </CardContent>
                 <CardFooter>
                     {/* CardFooter */}
