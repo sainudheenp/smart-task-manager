@@ -64,45 +64,6 @@ type SortableHeaderProps = {
     label: string;
 }
 
-// const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
-//     const isSorted = column.getIsSorted();
-//     const SortingIcon =
-//         isSorted === "asc"
-//             ? IoMdArrowUp
-//             : isSorted === "desc"
-//                 ? IoMdArrowDown
-//                 : ArrowUpDown
-
-//     return (
-//         <DropdownMenu>
-//             <DropdownMenuTrigger asChild>
-//                 <div className={`flex items-start py-[14px] select-none cursor-pointer p-2 gap-1 
-//                   ${isSorted && "text-primary"}  `} aria-label={`Sort by ${label}`} >
-//                     {label}
-//                     <SortingIcon className="h-4 w-4" />
-//                 </div>
-//             </DropdownMenuTrigger>
-//             <DropdownMenuContent align="start" side="bottom" className="poppins">
-//                 <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-//                     <IoMdArrowUp className="mr-2 h-4 w-4">
-//                         Asc
-//                     </IoMdArrowUp>
-//                 </DropdownMenuItem>
-//                 <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-//                     <IoMdArrowUp className="mr-2 h-4 w-4">
-//                         Desc
-//                     </IoMdArrowUp>
-//                 </DropdownMenuItem>
-//                 <DropdownMenuSeparator />
-//                 <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-//                     <IoMdArrowUp className="mr-2 h-4 w-4">
-//                         Hide
-//                     </IoMdArrowUp>
-//                 </DropdownMenuItem>
-//             </DropdownMenuContent>
-//         </DropdownMenu>
-//     )
-// };
 
 const SortableHeader: React.FC<SortableHeaderProps> = ({ column, label }) => {
   const isSorted = column.getIsSorted();

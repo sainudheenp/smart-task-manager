@@ -10,6 +10,9 @@ import { tasksColumns } from "./task-columns";
 import { Task, tasks } from "@/app/data/task-data"; 
 
 const TaskTable: React.FC = () => {
+
+  
+
   const table = useReactTable({
     data: tasks,
     columns: tasksColumns,
