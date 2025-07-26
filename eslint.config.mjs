@@ -10,9 +10,15 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // ✅ Ignore generated Prisma client
+  {
+    ignores: ["**/node_modules/**", "**/src/generated/prisma/**"],
+  },
+
+  // ✅ Default Next.js rules
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
-  // override block
+  // ✅ Override problematic rules (optional, from earlier)
   {
     files: ["**/*.ts", "**/*.tsx", "**/*.js"],
     rules: {
