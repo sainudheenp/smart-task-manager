@@ -45,7 +45,7 @@ function SingleStatCard({ singleCard }: { singleCard: SingleCard }) {
     return (
         <Card className="p-4 flex flex-col gap-2 shadow-none">
             <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-800">
+                <span className="text-sm font-semibold light:text-slate-800">
                     {singleCard.title}
                 </span>
 

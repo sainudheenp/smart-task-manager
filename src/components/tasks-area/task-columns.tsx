@@ -165,7 +165,7 @@ export const tasksColumns: ColumnDef<Task>[] = [
             return (
                 <div className="flex items-center gap-2 text-sm">
                     {StatusIcon && (
-                        <StatusIcon size={17} className="text-gray-600 opacity-95" />
+                        <StatusIcon size={17} className="light:text-gray-600 opacity-95" />
                     )}
                     <span>{status}</span>
                 </div>
@@ -183,7 +183,7 @@ export const tasksColumns: ColumnDef<Task>[] = [
                 <div>
                     {PriorityIcon && (
                         <div className="flex items-center gap-2 text-sm">
-                            <PriorityIcon className="text-gray-600 opacity-95" />
+                            <PriorityIcon className="light:text-gray-600 opacity-95" />
                             <span>{Priority}</span>
                         </div>
                     )}
@@ -206,9 +206,9 @@ export const tasksColumns: ColumnDef<Task>[] = [
         cell: ({ row }) => {
             const task = row.original
             return (
-                <div className="text-right">
+                // <div className="text-right">
                     <TaskDropDown task={task} />
-                </div>
+                // </div>
             )
         }
     }
