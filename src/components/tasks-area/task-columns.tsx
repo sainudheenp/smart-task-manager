@@ -1,3 +1,5 @@
+"use client"
+
 import { Priority, Task, Status, tasks } from "@/app/data/task-data";
 import { Badge } from "../ui/badge";
 import { Column, ColumnDef, ColumnFaceting } from '@tanstack/react-table'
@@ -42,7 +44,9 @@ function renderPriorityIcons(priority: Priority) {
 }
 
 function formatDate(date: Date): string {
-    
+    if(typeof(date)=="string"){
+           date = new Date(date); 
+    }
     const day = date.getDate()
     const month = date.toLocaleString("default", { month: "long" })
     const year = date.getFullYear()

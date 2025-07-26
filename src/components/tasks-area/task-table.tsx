@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,14 +7,27 @@ import {
   ColumnDef,
 } from "@tanstack/react-table";
 import { tasksColumns } from "./task-columns";
-import { Task, tasks } from "@/app/data/task-data"; 
+import { Task, tasks } from "@/app/data/task-data";
 
 const TaskTable: React.FC = () => {
 
-  
+  const [tasksnew, setTasks] = useState<Task[]>([])
+
+  const fetchTasks = async () => {
+    const res = await fetch('/api/tasks')
+    const data = await res.json()
+    setTasks(data)
+    console.log(tasksnew)
+  }
+
+  useEffect(() => {
+    fetchTasks()
+  }, [])
 
   const table = useReactTable({
-    data: tasks,
+    // data: tasks,
+    data: tasksnew,
+
     columns: tasksColumns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
