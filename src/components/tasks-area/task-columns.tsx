@@ -207,7 +207,8 @@ export const tasksColumns: ColumnDef<Task>[] = [
             const task = row.original
             return (
                 // <div className="text-right">
-                    <TaskDropDown task={task} />
+                    <TaskDropDown {...task} />
+                    // <TaskDropDown/>
                 // </div>
             )
         }

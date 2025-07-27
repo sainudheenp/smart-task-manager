@@ -15,7 +15,9 @@ import { LABEL_OPTIONS } from "./constants";
 }: {
   value: string; // Currently selected label
   onValueChange: (value: string) => void; // Callback for label change
-}) {
+}) 
+
+{
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger>
@@ -29,7 +31,7 @@ import { LABEL_OPTIONS } from "./constants";
             {LABEL_OPTIONS.map((option) => (
               <DropdownMenuRadioItem
                 key={option}
-                value={option.toLowerCase()}
+                value={option}
               >
                 {option} {/* Render each label option */}
               </DropdownMenuRadioItem>

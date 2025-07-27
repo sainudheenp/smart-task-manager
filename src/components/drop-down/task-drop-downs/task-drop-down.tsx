@@ -8,37 +8,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { MENU_ITEMS } from "./constants"
 import { MenuItem } from "./menu-items"
 import SubLabelMenu from "./sub-label-menu"
+import { Label, Task } from "@/app/data/task-data"
 
-// export function TaskDropDown() {
-//     const [selectedLabel, setSelectedLabel] = useState("Bug")
-//     return (
-//         <DropdownMenu>
-//             <DropdownMenuTrigger asChild>
-//                 <Button variant={"ghost"}>
-//                     <BsThreeDots />
-//                 </Button>
-//             </DropdownMenuTrigger>
-
-//             <DropdownMenuContent className="w-56 poppins">
-//                 <DropdownMenuGroup>
-//                     {
-//                         MENU_ITEMS.map((item) => (
-//                             <MenuItem key={item.label} Icon={item.icon} label={item.label} shortcut={item.shortcut} />
-//                         ))
-//                     }
-//                 </DropdownMenuGroup>
-//                 <DropdownMenuSeparator />
-//                 <DropdownMenuGroup>
-//                     <SubLabelMenu value={selectedLabel} onValueChange={setSelectedLabel} />
-//                 </DropdownMenuGroup>
-//             </DropdownMenuContent>
-
-//             <MenuItem Icon={Trash} label="Delete" shortcut="Q" className="text-red-500" />
-//         </DropdownMenu>
-//     )
-// }
-
-export function TaskDropDown({ task }: any) {
+export function TaskDropDown( task : Task) {
   const [selectedLabel, setSelectedLabel] = useState(task.label)
 
   return (
@@ -67,8 +39,8 @@ export function TaskDropDown({ task }: any) {
           <SubLabelMenu
             value={selectedLabel}
             onValueChange={(newLabel) => {
-              setSelectedLabel(newLabel)
-              console.log("Changed label to:", newLabel, "for task:", task.id)
+              setSelectedLabel(newLabel as Label)
+              console.log("Changed label to:", newLabel, "for task:", task.label)
             }}
           />
         </DropdownMenuGroup>
