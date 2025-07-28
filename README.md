@@ -1,8 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Task Manager
+
+A modern, full-stack task management application built with [Next.js](https://nextjs.org). Organize your tasks, boost productivity, and manage your workflow efficiently.
+
+## Features
+
+- Create, update, and delete tasks
+- Mark tasks as complete/incomplete
+- Organize tasks by categories or projects
+- Responsive UI for desktop and mobile
+- Fast, server-rendered pages with Next.js
+- Persistent storage (database integration)
+- User authentication (login/signup)
+- Dark mode support
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or newer recommended)
+- [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/smart-task-manager.git
+cd smart-task-manager
+```
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+# or
+bun install
+```
+
+### Running the Development Server
 
 ```bash
 npm run dev
@@ -14,23 +53,44 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
+
+## Project Structure
+
+- `app/` - Main application pages and components
+- `components/` - Reusable UI components
+- `lib/` - Utility functions and helpers
+- `styles/` - CSS/SCSS files
+- `prisma/` or `db/` - Database schema and access (if applicable)
+
+## Configuration
+
+- Environment variables are managed via `.env.local`
+- Update database connection strings and secrets as needed
+
+## Deployment
+
+Deploy easily on [Vercel](https://vercel.com/) or any Node.js hosting provider.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev/)
+- [Prisma Documentation](https://www.prisma.io/docs/) (if using Prisma)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Made with ❤️ using Next.js.
