@@ -7,7 +7,7 @@ export default function TaskTitle() {
             <Label className="opacity-75 text-sm font-medium">
                 Task Title
             </Label>
-            <Input placeholder="John Doe..." className="h-11" />
+            <Input placeholder="Login Page Design" className="h-11" />
             <p className="text-red-500 text-sm">
                 This is an error
             </p>

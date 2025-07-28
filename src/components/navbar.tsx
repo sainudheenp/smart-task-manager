@@ -6,7 +6,7 @@ import { ModeToggle } from "./mode-toggle"
 import { Button } from "@/components/ui/button"
 import { UserButton } from "@clerk/nextjs"
 
-export default function Navbar() {
+export default function Navbar({ onAddTaskClick }: { onAddTaskClick: () => void }) {
 
     const { theme } = useTheme()
     console.log(theme)
@@ -20,7 +20,7 @@ export default function Navbar() {
             <AppNameLogo />
 
             <div className="flex items-center gap-3 justify-center ">
-                <Button>Add Task</Button>
+                <Button onClick={onAddTaskClick}>Add Task</Button>
                 <ModeToggle />
                 <UserButton />
             </div>

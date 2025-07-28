@@ -10,12 +10,18 @@ import TaskLabel from './sub-components/task-labels';
 import TaskStatus from './sub-components/task-status';
 import TaskPriority from './sub-components/task-priority';
 
-export default function TaskDialog() {
+export default function TaskDialog({
+    open,
+    onOpenChange,
+}: {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+}) {
     return (
-        <Dialog>
-            <DialogTrigger asChild>
+        <Dialog open={open} onOpenChange={onOpenChange}>
+            {/* <DialogTrigger asChild>
                 <Button>Add New Task</Button>
-            </DialogTrigger>
+            </DialogTrigger> */}
             <DialogContent className="poppins max-w-4xl">
                 <DialogHeader>
                     <DialogTitle className="text-xl">Add New Task</DialogTitle>
