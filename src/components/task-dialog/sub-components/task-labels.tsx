@@ -9,11 +9,12 @@ import {
 import { useState } from "react";
 import {  Task } from "@/app/data/task-data";
 import { Label } from "@radix-ui/react-dropdown-menu";
-type Priority = {
+
+type Labels = {
   value: Task["label"];
 };
 
-const statuses: Priority[] = [
+const statuses: Labels[] = [
   { value: "Bug" },
   { value: "Feature" },
   { value: "Documentation" },
