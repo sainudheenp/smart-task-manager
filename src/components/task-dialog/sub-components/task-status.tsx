@@ -7,7 +7,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react";
 import { Task } from "@/app/data/task-data";
 import {
     ArrowUpCircle,
@@ -21,6 +20,11 @@ import {
 type Status = {
     value: Task["status"];
     icon: LucideIcon;
+};
+
+type TaskStatusProps = {
+    value: Task["status"];
+    onChange: (value: Task["status"]) => void;
 };
 
 const statuses: Status[] = [
@@ -43,17 +47,13 @@ const statuses: Status[] = [
     }
 ]
 
-export default function TaskStatus() {
-    const [selectedStatus, setSelectedStatus] = useState<Task["status"]>("Backlog");
-
+export default function TaskStatus({ value, onChange }: TaskStatusProps) {
     return (
         <div className="flex flex-col gap-2">
               <Label className="opacity-75 text-sm font-medium">Task Status</Label>
             <Select
-                value={selectedStatus}
-                onValueChange={(value: Task["status"]) => {
-                    setSelectedStatus(value);
-                }}
+                value={value}
+                onValueChange={onChange}
             >
                 <SelectTrigger className="w-full h-11">
                     <SelectValue placeholder="Select a status..." />

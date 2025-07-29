@@ -7,9 +7,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
 import { Task } from "@/app/data/task-data";
-
 import { IoMdArrowUp } from "react-icons/io";
 import { IoArrowBack } from "react-icons/io5";
 import { IoArrowDown } from "react-icons/io5";
@@ -18,6 +16,11 @@ import { IconType } from "react-icons/lib";
 type Priority = {
     value: Task["priority"];
     icon: IconType;
+};
+
+type TaskPriorityProps = {
+    value: Task["priority"];
+    onChange: (value: Task["priority"]) => void;
 };
 
 const statuses: Priority[] = [
@@ -35,17 +38,13 @@ const statuses: Priority[] = [
     },
 ];
 
-export default function TaskPriority() {
-    const [selectedStatus, setSelectedStatus] = useState<Task["priority"]>("Low");
-
+export default function TaskPriority({ value, onChange }: TaskPriorityProps) {
     return (
         <div className="flex flex-col gap-2">
             <Label className="opacity-75 text-sm font-medium">Task Priority</Label>
             <Select
-                value={selectedStatus}
-                onValueChange={(value: Task["priority"]) => {
-                    setSelectedStatus(value);
-                }}
+                value={value}
+                onValueChange={onChange}
             >
                 <SelectTrigger className="w-full h-11">
                     <SelectValue placeholder="Select a status..." />

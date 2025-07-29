@@ -10,6 +10,7 @@ import TaskLabel from './sub-components/task-labels';
 import TaskStatus from './sub-components/task-status';
 import TaskPriority from './sub-components/task-priority';
 import { useState } from "react";
+import { Label, Status, Priority } from "@/app/data/task-data";
 
 export default function TaskDialog({
     open,
@@ -19,9 +20,21 @@ export default function TaskDialog({
     onOpenChange: (open: boolean) => void;
 }) {
     const [title, setTitle] = useState("");
-    const [label, setLabel] = useState("Bug");
-    const [status, setStatus] = useState("Todo");
-    const [priority, setPriority] = useState("Low");
+    const [label, setLabel] = useState<Label>("Bug");
+    const [status, setStatus] = useState<Status>("Todo");
+    const [priority, setPriority] = useState<Priority>("Low");
+
+    const handleSubmit = async () => {
+        const task = { title, label, status, priority };
+        // Example: send to API
+        await fetch("/api/tasks", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(task),
+        });
+        // Optionally reset state or close dialog
+        onOpenChange(false);
+    };
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -39,11 +52,11 @@ export default function TaskDialog({
                 <div className="my-8">
                     <div className="grid grid-cols-2 gap-5">
                         <TaskTitle value={title} onChange={setTitle}/>
-                        <TaskStatus />
+                        <TaskStatus value={status} onChange={setStatus}/>
                     </div>
                     <div className="grid grid-cols-2 gap-5 mt-6">
-                        <TaskPriority />
-                        <TaskLabel />
+                        <TaskPriority value={priority} onChange={setPriority}/>
+                        <TaskLabel value={label} onChange={setLabel}/>
                     </div>
                 </div>
                 <DialogFooter className="mb-4 mt-9">
@@ -52,7 +65,7 @@ export default function TaskDialog({
                             Close
                         </Button>
                     </DialogClose>
-                    <Button type="submit">Add New Task</Button>
+                    <Button type="button" onClick={handleSubmit}>Add New Task</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

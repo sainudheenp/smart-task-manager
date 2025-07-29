@@ -6,12 +6,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
-import {  Task } from "@/app/data/task-data";
+import { Task } from "@/app/data/task-data";
 import { Label } from "@radix-ui/react-dropdown-menu";
 
 type Labels = {
   value: Task["label"];
+};
+
+type TaskLabelsProps = {
+  value: Task["label"];
+  onChange: (value: Task["label"]) => void;
 };
 
 const statuses: Labels[] = [
@@ -20,18 +24,11 @@ const statuses: Labels[] = [
   { value: "Documentation" },
 ];
 
-export default function TaskLabels() {
-  const [selectedStatus, setSelectedStatus] = useState<Task["label"]>("Bug");
-
+export default function TaskLabels({ value, onChange }: TaskLabelsProps) {
   return (
     <div className="flex flex-col gap-2">
       <Label className="opacity-75 text-sm font-medium">Task Label</Label>
-      <Select
-        value={selectedStatus}
-        onValueChange={(value: Task["label"]) => {
-          setSelectedStatus(value);
-        }}
-      >
+      <Select value={value} onValueChange={onChange}>
         <SelectTrigger className="w-full h-11">
           <SelectValue placeholder="Select a label..." />
         </SelectTrigger>
