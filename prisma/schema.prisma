@@ -43,4 +43,5 @@ model Task {
   priority   Priority
   status     Status
   createdAt  DateTime @default(now())
+  userId     String?
 }
